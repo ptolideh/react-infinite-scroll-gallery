@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 
 function App() {
-  const [scrollYPos, setScrollYPos] = useState<number>(0);
-  React.useEffect(() => {
-    const scrollTracker = () => {
-      setScrollYPos(window?.scrollY);
-    };
-    document.addEventListener("scroll", scrollTracker);
-
-    return () => {
-      document.removeEventListener("scroll", scrollTracker);
-    };
-  }, []);
   return (
     <main className="container mx-auto h-[1000px]">
       <div className="flex flex-col items-center justify-center h-screen">
