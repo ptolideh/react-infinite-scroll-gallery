@@ -1,28 +1,34 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export type ScrollPosType = {
   x: number;
   y: number;
 };
 
-const getX = () => Math.round(window.screenX);
-const getY = () => Math.round(window.screenY);
-
 export const useScrollPosition = (): ScrollPosType => {
   const [scrollPos, setScrollPos] = useState<ScrollPosType>(() => {
-    return { x: getX(), y: getY() };
+    return { x: 0, y: 0 };
   });
+
+  const getScrollPosition = useCallback(
+    () => ({
+      x: Math.round(window.scrollX),
+      y: Math.round(window.scrollY),
+    }),
+    []
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPos({ x: getX(), y: getY() });
+      setScrollPos(getScrollPosition());
     };
+
     document.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [getScrollPosition]);
 
   return scrollPos;
 };
