@@ -1,0 +1,21 @@
+import { cn } from "@/lib/utils";
+import * as React from "react";
+
+function ArtifactPhoto({
+  imageSrc = "https://images.metmuseum.org/CRDImages/ad/original/112937.jpg",
+  className = "",
+  ...delegatedDivProps
+}: React.ComponentProps<"div"> & {
+  imageSrc?: string;
+}) {
+  return (
+    <div
+      className={cn("w-full max-w-[600px] shadow-xl", className)}
+      {...delegatedDivProps}
+    >
+      <img className="w-full h-auto" src={imageSrc} />
+    </div>
+  );
+}
+
+export default ArtifactPhoto;
