@@ -3,9 +3,10 @@ import { useScrollPosition } from "./useScrollPosition";
 
 export const useScrollEnd = () => {
   const [isScrollEnd, setScrollEnd] = useState(false);
-  const { y: scrollYOffset } = useScrollPosition();
+  const { y: scrollOffsetY } = useScrollPosition();
 
   useEffect(() => {
+    // Helps reaching end earlier to metigate rounding errors of different browsers
     const ROUNDING_ERROR = 50;
 
     const documentHeight = Math.max(
@@ -20,14 +21,14 @@ export const useScrollEnd = () => {
     const viewportHeight = window.innerHeight;
     const scrollableHeight = documentHeight - viewportHeight - ROUNDING_ERROR;
 
-    console.log({ scrollYOffset, scrollableHeight });
+    // console.log({ scrollOffsetY, scrollableHeight });
 
-    if (scrollYOffset > 0 && scrollYOffset >= scrollableHeight) {
+    if (scrollOffsetY > 0 && scrollOffsetY >= scrollableHeight) {
       setScrollEnd(true);
     } else {
       setScrollEnd(false);
     }
-  }, [scrollYOffset]);
+  }, [scrollOffsetY]);
 
   return isScrollEnd;
 };

@@ -10,11 +10,12 @@ type StatusType = "idle" | "pending" | "success" | "error";
 
 function App() {
   const isScrollEnd = useScrollEnd();
-  const [images, setImages] = useState<ImageType[]>([]);
   const [pageCount, setPageCount] = useState(1);
+  const [images, setImages] = useState<ImageType[]>([]);
   const [status, setStatus] = useState<StatusType>("idle");
 
   useEffect(() => {
+    // pull data on first load (page:1) or when scroll reaches the document end
     if (pageCount === 1 || isScrollEnd) {
       setStatus("pending");
       pexelClient(pageCount).then(async (data) => {

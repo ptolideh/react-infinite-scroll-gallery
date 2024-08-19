@@ -32,6 +32,8 @@ export interface PexelResponse {
 }
 
 export const pexelClient = (pageNum: number): Promise<PexelResponse> => {
+  // pexel api requires page num and per page count
+  // authorized req handled in server.ts
   return fetch(
     `${import.meta.env.VITE_API_URL}?page=${pageNum}&per_page=5`
   ).then(async (res) => {

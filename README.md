@@ -1,8 +1,14 @@
 # React Infinite Scroll + Pexel API Gallery
 
 - Dynamically loads photos from Pexel API
+  - `api/server.ts`
+  - `api/pexel-api-client.ts`
 - Implements infinite scroll using custom React Hooks
+  - `hooks/useScrollPosition.tsx`
+  - `hooks/useScrollEnd.tsx`
 - Loads new photos from the API using inifinte scroll + loader
+  - `components | App.tsx`
+  - `components | ArtifactPhoto.tsx`
 
 ### 1. Add env variable
 
