@@ -1,13 +1,12 @@
 // import { useScrollPosition } from "@/lib/useScrollPosition";
 import ArtifactPhoto from "../ArtifactPhoto";
 import { useEffect, useState } from "react";
-import { useScrollEnd } from "@/lib/useScrollEnd";
-import { pexelClient } from "@/lib/pexel-api-client";
+import { useScrollEnd } from "@/lib/hooks/useScrollEnd";
+import { pexelClient } from "@/lib/api/pexel-api-client";
 
 type ImageType = { id: number; src: string; alt: string };
 
 function App() {
-  // const scrollPosition = useScrollPosition();
   const isScrollEnd = useScrollEnd();
   const [images, setImages] = useState<ImageType[]>([]);
   const [pageCount, setPageCount] = useState(1);
