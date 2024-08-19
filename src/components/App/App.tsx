@@ -1,17 +1,29 @@
-import { useScrollPosition } from "@/lib/useScrollPosition";
+// import { useScrollPosition } from "@/lib/useScrollPosition";
 import ArtifactPhoto from "../ArtifactPhoto";
 import { useEffect } from "react";
-import { client } from "@/lib/api-client";
+import { useScrollEnd } from "@/lib/useScrollEnd";
 
 function App() {
-  const scrollPosition = useScrollPosition();
-  console.log(scrollPosition);
+  // const scrollPosition = useScrollPosition();
+  const isScrollEnd = useScrollEnd();
+  // const imageGenRef = useRef(new ImageGenerator());
+  // useEffect(() => {
+  // imageGenRef.current
+  //   .fetchImages()
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.error(err));
+  // }, [imageGenRef]);
+  // useEffect(() => {
+  //   client(4000)
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log(`error: ${err.message}`));
+  // }, []);
 
   useEffect(() => {
-    client(4000)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(`error: ${err.message}`));
-  }, []);
+    if (isScrollEnd) {
+      alert("End of the line buddy!");
+    }
+  }, [isScrollEnd]);
 
   return (
     <main className="container mx-auto">
@@ -19,6 +31,8 @@ function App() {
         <h1 className="mx-4 font-bold mb-10 mt-2">REACT TYPESCRIPT APP</h1>
       </div>
       <div className="flex flex-col items-center space-y-10">
+        <ArtifactPhoto />
+        <ArtifactPhoto />
         <ArtifactPhoto />
       </div>
     </main>
