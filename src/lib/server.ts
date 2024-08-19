@@ -33,14 +33,15 @@ app.get("/api/pexels", async (req: Request, res: Response) => {
       },
     });
 
+    const responseText = await response.text();
+
     if (!response.ok) {
-      const errorText = await response.text();
       throw new Error(
-        `HTTP error! status: ${response.status}, message: ${errorText}`
+        `HTTP error! status: ${response.status}, message: ${responseText}`
       );
     }
 
-    const data = await response.json();
+    const data = JSON.parse(responseText);
     res.json(data);
   } catch (error) {
     console.error("Error:", error);

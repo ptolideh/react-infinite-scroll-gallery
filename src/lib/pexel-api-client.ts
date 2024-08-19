@@ -1,4 +1,4 @@
-export interface Src {
+interface Src {
   original: string;
   large2x: string;
   large: string;
@@ -9,7 +9,7 @@ export interface Src {
   tiny: string;
 }
 
-export interface PexelResponse {
+interface Photo {
   id: number;
   width: number;
   height: number;
@@ -23,21 +23,29 @@ export interface PexelResponse {
   alt: string;
 }
 
-export const pexelClient = (
-  pageNum: number
-): Promise<PexelResponse | undefined> => {
+export interface PexelResponse {
+  page: number;
+  per_page: number;
+  photos: Photo[];
+  total_results: number;
+  next_page: string;
+}
+
+export const pexelClient = (pageNum: number): Promise<PexelResponse> => {
   return fetch(
     `${import.meta.env.VITE_API_URL}?page=${pageNum}&per_page=5`
   ).then(async (res) => {
     try {
-      const data: PexelResponse = await res.json();
-      if (!res.body) {
-        throw data;
+      const resText = await res.text();
+      if (!res.ok) {
+        throw new Error(`HTTP Error! message: ${resText}`);
       }
+      const data: PexelResponse = JSON.parse(resText);
       return data;
     } catch (err) {
-      console.error("Error | pexelClient\n", err);
-      throw err;
+      let errMessage = "Unknown API Client Error! message: ";
+      errMessage += err instanceof Error ? err.message : JSON.stringify(err);
+      throw new Error(errMessage);
     }
   });
 };
