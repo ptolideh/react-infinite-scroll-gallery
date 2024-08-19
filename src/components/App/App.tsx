@@ -2,6 +2,7 @@
 import ArtifactPhoto from "../ArtifactPhoto";
 import { useEffect } from "react";
 import { useScrollEnd } from "@/lib/useScrollEnd";
+import { pexelClient } from "@/lib/pexel-api-client";
 
 function App() {
   // const scrollPosition = useScrollPosition();
@@ -13,11 +14,11 @@ function App() {
   //   .then((res) => console.log(res))
   //   .catch((err) => console.error(err));
   // }, [imageGenRef]);
-  // useEffect(() => {
-  //   client(4000)
-  //     .then((data) => console.log(data))
-  //     .catch((err) => console.log(`error: ${err.message}`));
-  // }, []);
+  useEffect(() => {
+    pexelClient(1)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(`error: ${err.message}`));
+  }, []);
 
   useEffect(() => {
     if (isScrollEnd) {
